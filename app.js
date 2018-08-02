@@ -8,6 +8,9 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+
+//File Upload 
+var upload = require('express-fileupload');
 const session      = require('express-session');
 const passport     = require('passport');
 const cors         = require('cors');
@@ -18,7 +21,7 @@ passportSetup(passport);
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/rolltop', {useMongoClient: true})
+  .connect('mongodb://localhost/testspace', {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -31,10 +34,14 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 const app = express();
 
 // Middleware Setup
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//File Upload
+app.use(upload());
 
 // Express View engine setup
 app.use(require('node-sass-middleware')({
@@ -65,6 +72,18 @@ app.locals.title = 'Rolltop - Your All Access Online Desk';
 const index = require('./routes/index');
 app.use('/', index);
 
+
+const nRoutes = require('./routes/api/noteRoutes');
+app.use('/api', nRoutes);
+
+const uRoutes = require('./routes/api/PasteRoutes');
+app.use('/paste', uRoutes);
+
+app.all('/*', function (req, res) {
+  res.sendfile(__dirname + '/public/index.html');
+});
+
+
 const placeRoutes = require('./routes/place-routes');
 app.use('/api', placeRoutes);
 
@@ -73,5 +92,11 @@ app.use('/api', projectRoutes);
 
 const authRoutes = require('./routes/auth-routes');
 app.use('/api', authRoutes);
+
+app.all('/*', function (req, res) {
+  res.sendfile(__dirname + '/public/index.html');
+});
+
+
 
 module.exports = app;
