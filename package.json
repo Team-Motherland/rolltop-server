@@ -13,7 +13,21 @@
     "cors": "^2.8.4",
     "dotenv": "~4.0.0",
     "express": "~4.16.0",
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "express-fileupload": "^0.4.0",
+    "fs": "0.0.1-security",
+=======
     "express-session": "^1.15.6",
+>>>>>>> e284be75e42dc77d298f8fdedec3ab126ca8cc3d
+=======
+
+    "express-fileupload": "^0.4.0",
+    "fs": "0.0.1-security",
+
+    "express-session": "^1.15.6",
+
+>>>>>>> 324ede0f19f7940fa221db225961fb66d3333289
     "hbs": "~4.0.1",
     "mongoose": "~4.13.4",
     "morgan": "~1.9.0",

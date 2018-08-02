@@ -1,0 +1,14 @@
+// Get All Notes (JM) (DONE)
+router.get('/notes/getNotes')
+
+// Post New Note (JM) (DONE)
+router.post('/notes/postNote')
+
+// Get Specific Notes (JM) (DONE)
+router.get('/notes/getNote/:id')
+
+//Edit Notes (JM) (DONE)
+router.post('/notes/editNote/:id')
+
+//Delete Notes (JM) (TODO)
+router.post('/notes/deleteNote/:id')
