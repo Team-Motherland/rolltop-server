@@ -57,8 +57,8 @@ authRoutes.post('/signup', (req, res, next) => {
             }
             
             // (JM) : Create Folder for pastebin
-            //var dir = __dirname + '../../../pastebin/' + theUser.id;
-            //fs.mkdirSync(dir);
+            var dir = __dirname + '../../../public/pastebin/' + theUser.id;
+            fs.mkdirSync(dir);
             
 
             req.login(theUser, (err) => {
