@@ -1,7 +1,7 @@
 const express       = require('express');
 const router        = express.Router();
 //const Note        = require('../../models/Note');
-const testFolder = __dirname + '../../../pastebin/';
+const testFolder = __dirname + '../../../public/pastebin/';
 const fs            = require('fs');
 
 
@@ -14,6 +14,7 @@ router.get('/',function(req,res){
 // Uploads File POST (JM) (TODO: Upload to user folder, allow upload if folder is less than 75MB) 
 router.post('/upload',function(req,res){
 
+	console.log("Upload Called");
   if(req.user === undefined){
 	console.log("Not logged in");
     return res.json("Not logged in");
@@ -24,7 +25,7 @@ router.post('/upload',function(req,res){
       var file = req.files.upload,
         name = file.name, //file.name,
         type = file.mimetype;
-      var uploadpath = __dirname + '../../../pastebin/' + req.user.id + "/" + name;
+      var uploadpath = __dirname + '../../../public/pastebin/' + req.user.id + "/" + name;
       file.mv(uploadpath,function(err){
         if(err){
           console.log("File Upload Failed",name,err);
@@ -50,7 +51,7 @@ router.get('/download/:name', function(req, res){
   }
 
     var fileName = req.params.name; 
-    var file = __dirname + '../../../pastebin/' + req.user.id + "/" + fileName;
+    var file = __dirname + '../../../public/pastebin/' + req.user.id + "/" + fileName;
     res.download(file); // Set disposition and send it.
 });
 
